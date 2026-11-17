@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrusel de Imágenes</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <header>
+        <h1>Las mejores granjas tecnicas de minecraft</h1>
+        <p>Conoce las granjas mas eficientes de minecraft bedrock</p>
+    </header>
+    <main>
+        <section class="carrusel">
+            <button class="btn-carrusel izquierdo">⇚</button>
+            <div class="contenedor-slides">
+            <div class="imagenes">
+                <div class="slide">
+                    <img src="imagenes/oro.jpeg" alt="Granja de Oro">
+                    <div class="degradado"></div>
+                    <div class="texto-granja">Granja de Oro</div>
+                </div>
+                <div class="slide">
+                    <img src="imagenes/gravedad.jpeg" alt="Granja de Gravedad">
+                    <div class="degradado"></div>
+                    <div class="texto-granja">Granja de Gravedad</div>
+                </div>
+                <div class="slide">
+                    <img src="imagenes/ahogados.jpeg" alt="Granja de Ahogados">
+                    <div class="degradado"></div>
+                    <div class="texto-granja">Granja de Ahogados</div>
+                </div>
+                <div class="slide">
+                    <img src="imagenes/hierro.jpeg" alt="Granja de Hierro">
+                    <div class="degradado"></div>
+                    <div class="texto-granja">Granja de Hierro</div>
+                </div>
+                <div class="slide">
+                    <img src="imagenes/crepper.jpeg" alt="Granja de Creeper">
+                    <div class="degradado"></div>
+                    <div class="texto-granja">Granja de Creeper</div>
+                </div>
+            </div>
+            <button class="btn-carrusel derecho">⇛</button>
+        </section>
+    </main>
+    <div class="menu-contenedor">
+        <button id="botonMenu">☰</button>
+        <div class="barra-opciones" id="barra">
+            <button>Granja de Oro</button>
+            <button>Granja de Gravedad</button>
+            <button>Granja de Ahogados</button>
+            <button>Granja de Hierro</button>
+            <button>Granja de Crepper</button>
+        </div>
+    </div>
+    <script>
+        const boton = document.getElementById("botonMenu");
+        const barra = document.getElementById("barra");
+        boton.addEventListener("click", function(){
+            barra.classList.toggle("abierta");
+        })
+
+        const track = document.querySelector(".imagenes");
+        const btnIzq = document.querySelector(".izquierdo");
+        const btnDer = document.querySelector(".derecho");
+        let posicion = 0;
+        const paso = 20;
+
+        function irSiguiente(){
+            posicion = posicion - paso;
+            if(posicion <= -100){
+                posicion = 0;
+            }
+            track.style.transform = 'translateX(' + posicion + '%)';
+        }
+
+        function irAnterior(){
+            posicion = posicion + paso;
+            if(posicion > 0){
+                posicion = -80;
+            }
+            track.style.transform = 'translateX(' + posicion + '%)';
+        }
+
+        let auto = setInterval(irSiguiente, 4000);
+
+        btnDer.addEventListener("click", function(){
+            clearInterval(auto);
+            irSiguiente();
+            auto = setInterval(irSiguiente, 4000);
+        })
+
+        btnIzq.addEventListener("click", function(){
+            clearInterval(auto);
+            irAnterior();
+            auto = setInterval(irSiguiente, 4000);
+        })
+    </script>
+</body>
+</html>
